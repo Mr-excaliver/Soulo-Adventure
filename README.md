@@ -14,16 +14,16 @@ Gamedev: Mario Inspired Game
 - Double Jump Control : "SPACE"
 
 **Enemies**
--Melee Enemies walk in a predefined linear path and Attack when Player is Close
--Ranged Enemies Move in a circular path. Has Shield that has to be broken first and attacks the Player with Fireballs.
+- Melee Enemies walk in a predefined linear path and Attack when Player is Close
+- Ranged Enemies Move in a circular path. Has Shield that has to be broken first and attacks the Player with Fireballs.
 
 **Interactables**
--COINs - Collect to increase score
--End Gate - Use to go to Next World
--Health Packs - Use to Regen Health
+- COINs - Collect to increase score
+- End Gate - Use to go to Next World
+- Health Packs - Use to Regen Health
 
 
  **UI Control**
--When in game press "ESC" to bring up the PAUSE menu Consisting of Three Options 1. Resume 2.Retry 3. Menu
--When in Menu press "LEFT MB" to start the game and press "ESC" to close the game
+- When in game press "ESC" to bring up the PAUSE menu Consisting of Three Options 1. Resume 2.Retry 3. Menu
+- When in Menu press "LEFT MB" to start the game and press "ESC" to close the game
   
