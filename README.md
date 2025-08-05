@@ -26,4 +26,8 @@ Gamedev: Mario Inspired Game
  **UI Control**
 - When in game press "ESC" to bring up the PAUSE menu Consisting of Three Options 1. Resume 2.Retry 3. Menu
 - When in Menu press "LEFT MB" to start the game and press "ESC" to close the game
+
+##Set-Up
+-To Go Trough the Code GODOT v3.2.3.stable is required
+-To Run the game , Run the executable file given in the Releases folder
   
