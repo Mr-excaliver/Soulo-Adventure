@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/Imports/thumbbig-705837.png" type="Texture" id=1]
+[ext_resource path="res://src/ui/ui_script/MainScreen.gd" type="Script" id=2]
+[ext_resource path="res://src/Imports/default_font_theme.tres" type="Theme" id=3]
+[ext_resource path="res://src/ui/ui_scene/Label.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/ui/ui_script/Tap to start.gd" type="Script" id=5]
+[ext_resource path="res://src/Imports/soul-0 adventures logo.png" type="Texture" id=6]
+[ext_resource path="res://src/scenes/fade_in.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 140.7, 13.8591 ), Vector2( 140.7, 12 ), Vector2( 140.7, 13.8591 ) ]
+}
+
+[node name="MainScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="TextureRect" parent="."]
+anchor_left = -0.0345408
+anchor_top = -0.0588433
+anchor_right = 1.05035
+anchor_bottom = 1.06198
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="title holder" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="TextureRect" parent="title holder"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -179.3
+margin_top = 13.8591
+margin_right = 148.7
+margin_bottom = 178.859
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="title holder/Title"]
+autoplay = "default"
+anims/default = SubResource( 1 )
+
+[node name="Label" parent="." instance=ExtResource( 4 )]
+margin_left = -318.5
+margin_top = -69.0
+margin_right = 318.5
+text = "tap   to   start
+"
+
+[node name="Button" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0720215
+margin_bottom = 0.119995
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+Attached_scene = "res://src/scenes/level-1.tscn"
+
+[node name="fade layer" parent="Button" instance=ExtResource( 7 )]
+[connection signal="button_down" from="Button" to="Button" method="_on_Button_button_down"]

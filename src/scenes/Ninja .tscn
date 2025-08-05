@@ -1,0 +1,285 @@
+[gd_scene load_steps=46 format=2]
+
+[ext_resource path="res://src/scripts/Ninja .gd" type="Script" id=1]
+[ext_resource path="res://src/Imports/ninja_sprite_sheet1.png" type="Texture" id=2]
+[ext_resource path="res://src/Imports/ninja_sprite_sheet_idlet.png" type="Texture" id=3]
+[ext_resource path="res://src/Imports/jump_animation.png" type="Texture" id=4]
+[ext_resource path="res://src/Imports/attack-1.png" type="Texture" id=5]
+[ext_resource path="res://src/Imports/attack-2.png" type="Texture" id=6]
+[ext_resource path="res://src/Imports/attack-4.png" type="Texture" id=7]
+[ext_resource path="res://src/Imports/attack-3.png" type="Texture" id=8]
+[ext_resource path="res://src/Imports/attack-5.png" type="Texture" id=9]
+[ext_resource path="res://src/Imports/throwing_animation(in air).png" type="Texture" id=10]
+[ext_resource path="res://src/Imports/throwing_animation(on ground).png" type="Texture" id=11]
+[ext_resource path="res://src/scenes/hitbox .tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/Imports/shader.tres" type="Material" id=13]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 224, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 32, 40 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 32, 40 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 0, 32, 40 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 11 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 11 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 11 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 11 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 10 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 10 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 10 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 10 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=27]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "run",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 14 ) ],
+"loop": false,
+"name": "double_jump",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 15 ) ],
+"loop": false,
+"name": "jump",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "attacking",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 16 ) ],
+"loop": false,
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"loop": false,
+"name": "ground",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+"loop": false,
+"name": "air",
+"speed": 30.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=28]
+extents = Vector2( 3.09693, 6.81248 )
+
+[sub_resource type="CapsuleShape2D" id=29]
+radius = 21.7704
+height = 14.0954
+
+[sub_resource type="CapsuleShape2D" id=30]
+height = 54.2629
+
+[sub_resource type="Animation" id=31]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("melee_range/attack_hitbox/attack_area:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("melee_range/attack_hitbox/attack_down:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false, false, true ]
+}
+
+[sub_resource type="CapsuleShape2D" id=32]
+radius = 15.3839
+height = 25.743
+
+[node name="Ninja" type="KinematicBody2D"]
+collision_layer = 32
+collision_mask = 2147483996
+script = ExtResource( 1 )
+cap_kunai_amount = 15
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 13 )
+scale = Vector2( 2.10458, 1.99707 )
+frames = SubResource( 27 )
+animation = "attacking"
+frame = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.239008, 5.96583 )
+scale = Vector2( 3.81455, 3.55728 )
+shape = SubResource( 28 )
+
+[node name="melee_range" type="Position2D" parent="."]
+position = Vector2( 0, -4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="attack_hitbox" type="Area2D" parent="melee_range"]
+collision_mask = 64
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="attack_area" type="CollisionShape2D" parent="melee_range/attack_hitbox"]
+position = Vector2( 50, 11 )
+shape = SubResource( 29 )
+disabled = true
+
+[node name="attack_down" type="CollisionShape2D" parent="melee_range/attack_hitbox"]
+position = Vector2( 10, 35 )
+rotation = 1.5708
+shape = SubResource( 30 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attacking = SubResource( 31 )
+
+[node name="item_position" type="Position2D" parent="."]
+position = Vector2( -6, 17.68 )
+scale = Vector2( 1.1387, 1.04793 )
+
+[node name="kunai_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Player_hitbox" parent="." instance=ExtResource( 12 )]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Player_hitbox" index="0"]
+position = Vector2( -0.562954, 4.66344 )
+shape = SubResource( 32 )
+
+[node name="Atk" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="invincibility" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[node name="not_hit" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
+[connection signal="area_entered" from="Player_hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="not_hit" to="." method="on_hit"]
+
+[editable path="Player_hitbox"]

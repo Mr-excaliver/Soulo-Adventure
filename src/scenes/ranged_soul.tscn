@@ -1,0 +1,228 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://src/scripts/ranged_soul.gd" type="Script" id=1]
+[ext_resource path="res://src/Imports/ranged_enemy-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://src/Imports/force_shield-Sheet.png" type="Texture" id=3]
+[ext_resource path="res://src/Imports/ranged_enemy-Sheet-stationary.png" type="Texture" id=4]
+[ext_resource path="res://src/Imports/ranged soul on hit.png" type="Texture" id=5]
+[ext_resource path="res://src/Imports/shader.tres" type="Material" id=6]
+[ext_resource path="res://src/Imports/health_fill.png" type="Texture" id=7]
+[ext_resource path="res://src/Imports/health_border.png" type="Texture" id=8]
+[ext_resource path="res://src/Imports/health_empty.png" type="Texture" id=9]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=15]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "no_sheild",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": false,
+"name": "hit",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=16]
+radius = 25.8377
+
+[sub_resource type="CircleShape2D" id=17]
+radius = 52.6264
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=19]
+animations = [ {
+"frames": [ SubResource( 18 ) ],
+"loop": true,
+"name": "normal",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=20]
+radius = 25.6205
+
+[sub_resource type="CapsuleShape2D" id=21]
+radius = 26.1214
+
+[node name="circular_pivot" type="Area2D"]
+monitorable = false
+collision_layer = 0
+collision_mask = 36
+script = ExtResource( 1 )
+radius = 205
+
+[node name="ranged_soul" type="Area2D" parent="."]
+position = Vector2( -139.716, 0 )
+collision_layer = 64
+collision_mask = 4
+
+[node name="sprite" type="AnimatedSprite" parent="ranged_soul"]
+material = ExtResource( 6 )
+scale = Vector2( 2.105, 1.997 )
+frames = SubResource( 15 )
+animation = "hit"
+
+[node name="Position2D" type="Position2D" parent="ranged_soul"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ranged_soul"]
+shape = SubResource( 16 )
+
+[node name="detect_range" type="Area2D" parent="ranged_soul"]
+monitorable = false
+collision_layer = 0
+collision_mask = 36
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ranged_soul/detect_range"]
+
+[node name="shoot_cooldown" type="Timer" parent="ranged_soul"]
+wait_time = 0.5
+one_shot = true
+
+[node name="force_sheild" type="Area2D" parent="ranged_soul"]
+collision_layer = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ranged_soul/force_sheild"]
+shape = SubResource( 17 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ranged_soul/force_sheild"]
+material = ExtResource( 6 )
+scale = Vector2( 2.5, 2.5 )
+frames = SubResource( 19 )
+animation = "normal"
+
+[node name="atk_timer" type="Timer" parent="ranged_soul"]
+wait_time = 0.4
+one_shot = true
+
+[node name="stun" type="Timer" parent="ranged_soul"]
+wait_time = 0.3
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ranged_soul"]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ranged_soul/StaticBody2D"]
+shape = SubResource( 20 )
+
+[node name="wall_checker" type="Area2D" parent="ranged_soul"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ranged_soul/wall_checker"]
+shape = SubResource( 21 )
+
+[node name="flash" type="Timer" parent="ranged_soul"]
+wait_time = 0.2
+one_shot = true
+
+[node name="healthbar" type="TextureProgress" parent="ranged_soul"]
+visible = false
+margin_left = -35.0
+margin_top = -64.0
+margin_right = 34.0
+margin_bottom = -53.0
+texture_under = ExtResource( 9 )
+texture_over = ExtResource( 8 )
+texture_progress = ExtResource( 7 )
+tint_progress = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HEALTHBAR" type="TextureProgress" parent="ranged_soul"]
+visible = false
+margin_left = -35.1902
+margin_top = -63.904
+margin_right = 33.8098
+margin_bottom = -52.904
+value = 100.0
+texture_progress = ExtResource( 7 )
+tint_progress = Color( 0, 1, 0.615686, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Update_tween" type="Tween" parent="ranged_soul"]
+
+[node name="Health_visibility" type="Timer" parent="ranged_soul"]
+wait_time = 0.7
+one_shot = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="ranged_soul"]
+position = Vector2( -0.750838, -0.315341 )
+scale = Vector2( 3.06066, 3.53436 )
+[connection signal="area_entered" from="ranged_soul" to="." method="_on_ranged_soul_area_entered"]
+[connection signal="area_entered" from="ranged_soul/detect_range" to="." method="_on_detect_range_area_entered"]
+[connection signal="area_exited" from="ranged_soul/detect_range" to="." method="_on_detect_range_area_exited"]
+[connection signal="area_entered" from="ranged_soul/force_sheild" to="." method="_on_force_sheild_area_entered"]
+[connection signal="timeout" from="ranged_soul/stun" to="." method="_on_stun_timeout"]
+[connection signal="body_entered" from="ranged_soul/wall_checker" to="." method="inside_wall"]
+[connection signal="body_exited" from="ranged_soul/wall_checker" to="." method="outside_wall"]
+[connection signal="timeout" from="ranged_soul/flash" to="." method="_on_flash_timeout"]
+[connection signal="timeout" from="ranged_soul/Health_visibility" to="." method="_on_Health_visibility_timeout"]
+[connection signal="screen_entered" from="ranged_soul/VisibilityNotifier2D" to="." method="visible"]
+[connection signal="screen_exited" from="ranged_soul/VisibilityNotifier2D" to="." method="not_visible"]

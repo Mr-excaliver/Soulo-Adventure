@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/ui/ui_script/resume_button.gd" type="Script" id=1]
+[ext_resource path="res://src/Imports/RESUME BUTTON_down.png" type="Texture" id=2]
+[ext_resource path="res://src/Imports/RESUME BUTTON.png" type="Texture" id=3]
+[ext_resource path="res://src/Imports/RESUME BUTTON_hover.png" type="Texture" id=4]
+
+[node name="resume_button" type="TextureButton"]
+margin_right = 83.0
+margin_bottom = 37.0
+size_flags_vertical = 3
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 4 )
+expand = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="." to="." method="_on_resume_button_up"]

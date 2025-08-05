@@ -1,0 +1,226 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://src/Imports/shader.tres" type="Material" id=1]
+[ext_resource path="res://src/Imports/health_fill.png" type="Texture" id=2]
+[ext_resource path="res://src/Imports/melee_soul-Sheet.png" type="Texture" id=3]
+[ext_resource path="res://src/scripts/Melee Soul.gd" type="Script" id=4]
+[ext_resource path="res://src/Imports/melee_soul-Sheet_ani.png" type="Texture" id=9]
+[ext_resource path="res://src/Imports/health_border.png" type="Texture" id=10]
+[ext_resource path="res://src/Imports/health_empty.png" type="Texture" id=11]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 9 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 9 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 9 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 9 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 9 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 9 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": false,
+"name": "attack",
+"speed": 15.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 10, 22.931 )
+
+[sub_resource type="CircleShape2D" id=15]
+radius = 14.2781
+
+[sub_resource type="CapsuleShape2D" id=16]
+radius = 15.0
+height = 34.0
+
+[sub_resource type="CapsuleShape2D" id=17]
+radius = 15.101
+height = 0.0
+
+[sub_resource type="Animation" id=18]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("atk/hurtbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.144091, 0.272297, 0.4 ),
+"transitions": PoolRealArray( 1, 0.0110486, 1, 1 ),
+"update": 0,
+"values": [ true, false, false, true ]
+}
+
+[node name="Melee Soul" type="KinematicBody2D"]
+modulate = Color( 1, 1, 1, 0.996078 )
+collision_layer = 64
+collision_mask = 4
+script = ExtResource( 4 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 1 )
+position = Vector2( -2.98483, 0 )
+scale = Vector2( 2.105, 1.997 )
+frames = SubResource( 13 )
+animation = "attack"
+frame = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -4.47134, 8.66 )
+shape = SubResource( 14 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( -4.47134, -10.4882 )
+shape = SubResource( 15 )
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 129
+
+[node name="hit_area" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( -4.47134, 2.31247 )
+shape = SubResource( 16 )
+
+[node name="atk" type="Position2D" parent="."]
+position = Vector2( 0, -4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="hurtbox" type="Area2D" parent="atk"]
+collision_layer = 2
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="atk/hurtbox"]
+position = Vector2( 43, 16.316 )
+shape = SubResource( 17 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack = SubResource( 18 )
+
+[node name="right" type="RayCast2D" parent="." groups=[
+"identifiers",
+]]
+position = Vector2( 0, -4 )
+rotation = -1.5708
+enabled = true
+collision_mask = 32
+
+[node name="right_down" type="RayCast2D" parent="." groups=[
+"identifiers",
+]]
+position = Vector2( 0, -4 )
+rotation = -0.959931
+enabled = true
+cast_to = Vector2( 0, 55 )
+collision_mask = 32
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -5.76083, 4.75166 )
+scale = Vector2( 1.57608, 2.72003 )
+
+[node name="attack_recovery" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="stun_timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="invincible" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="flash" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="healthbar" type="TextureProgress" parent="."]
+margin_left = -34.4514
+margin_top = -45.07
+margin_right = 34.5486
+margin_bottom = -34.07
+value = 100.0
+texture_under = ExtResource( 11 )
+texture_over = ExtResource( 10 )
+texture_progress = ExtResource( 2 )
+tint_progress = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HEALTHBAR" type="TextureProgress" parent="."]
+margin_left = -34.4514
+margin_top = -45.07
+margin_right = 34.5486
+margin_bottom = -34.07
+value = 100.0
+texture_progress = ExtResource( 2 )
+tint_progress = Color( 0, 1, 0.615686, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Update_tween" type="Tween" parent="."]
+
+[node name="healthbar_visiblility" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="stun_timer" to="." method="timeout"]
+[connection signal="timeout" from="invincible" to="." method="_on_invincible_timeout"]
+[connection signal="timeout" from="flash" to="." method="_on_flash_timeout"]
+[connection signal="timeout" from="healthbar_visiblility" to="." method="_on_healthbar_visiblility_timeout"]
